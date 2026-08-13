@@ -4,13 +4,13 @@ mod wal;
 
 use wal::Wal;
 
-fn main() {
-    let mut wal = Wal::new("app.log").unwrap();
+fn main() -> std::io::Result<()> {
+    let mut wal = Wal::new("app.log")?;
 
-    wal.write_log("helloo").expect("Something went wrong");
-    wal.write_log("its").expect("Something went wrong");
-    wal.write_log("me").expect("Something went wrong");
-    wal.write_log("kalfar").expect("Something went wrong");
+    wal.write_log("helloo")?;
+    wal.write_log("its")?;
+    wal.write_log("me")?;
+    wal.write_log("kalfar")?;
 
-    println!("Hello, world!");
+    Ok(())
 }
