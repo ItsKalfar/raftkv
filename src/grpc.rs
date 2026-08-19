@@ -13,10 +13,10 @@ pub struct RaftRpc {
 
 #[tonic::async_trait]
 impl RaftService for RaftRpc {
-    async fn append_entires(
+    async fn append_entries(
         &self,
-        req: Request<pb::AppendEntiresRequest>,
-    ) -> Result<Response<pb::AppendEntiresResponse>, Status> {
+        req: Request<pb::AppendEntriesRequest>,
+    ) -> Result<Response<pb::AppendEntriesResponse>, Status> {
         todo!()
     }
 

@@ -3,13 +3,13 @@ syntax = "proto3";
 package raft;
 
 service RaftService {
-    rpc AppendEntires(AppendEntiresRequest) returns (AppendEntiresResponse);
+    rpc AppendEntries(AppendEntriesRequest) returns (AppendEntriesResponse);
     rpc CommitEntries(CommitEntriesRequest) returns (CommitEntriesResponse);
 }
 
-message AppendEntiresRequest {}
+message AppendEntriesRequest {}
 
-message AppendEntiresResponse {}
+message AppendEntriesResponse {}
 
 message CommitEntriesRequest {}
 
