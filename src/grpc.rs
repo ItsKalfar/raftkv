@@ -14,7 +14,7 @@ pub mod pb {
 }
 
 pub struct RaftRpc {
-    pub node: Mutex<raft::Node>,
+    pub node: Mutex<raft::Node>, // TODO: AI is also asking to use Arc here, study why.
 }
 
 #[tonic::async_trait]
