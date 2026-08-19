@@ -3,15 +3,10 @@
 mod raft;
 mod wal;
 
-use wal::Wal;
-
 fn main() -> std::io::Result<()> {
-    let mut wal = Wal::new("app.log")?;
-
-    wal.write_log("helloo")?;
-    wal.write_log("its")?;
-    wal.write_log("me")?;
-    wal.write_log("kalfar")?;
-
+    // Will start grpc server for this node
+    // get the address and initialize clients for remaining nodes
+    // Check for exisiting log file
+    // Start a node
     Ok(())
 }
