@@ -1,5 +1,6 @@
 // Build order - WAL -> Election -> Replication -> State machine
 
+mod raft;
 mod wal;
 
 use wal::Wal;
