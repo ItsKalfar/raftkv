@@ -1,17 +1,14 @@
-// Build order - WAL -> Election -> Replication -> State machine
+use grpc::{RaftRpc, pb::raft_service_server::RaftServiceServer};
 
+mod grpc;
 mod raft;
 mod wal;
 
-fn main() -> std::io::Result<()> {
-    // Start grpc server for this node
-    // Create channel and client for rest of the nodes -> Get node address from config file or something like that
-
-    // If this node is leader -> Receive queries from client
-    // Then complete a data lifecyle here -> append -> commit -> on each request
-
-    // If this node is follower -> recive data from leader
-    // perform operation of follower on each request
-
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    tonic::transport::Server::builder()
+        .add_service(RaftServiceServer::new(RaftRpc { node: todo!() }))
+        .serve("127.0.0.1:50051".parse()?)
+        .await?;
     Ok(())
 }

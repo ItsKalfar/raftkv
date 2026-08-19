@@ -2,18 +2,15 @@ syntax = "proto3";
 
 package raft;
 
-service RaftCoreService {
-    rpc AppendEntires() return () {}
-    rpc CommitEntries() return () {}
+service RaftService {
+    rpc AppendEntires(AppendEntiresRequest) returns (AppendEntiresResponse);
+    rpc CommitEntries(CommitEntriesRequest) returns (CommitEntriesResponse);
 }
 
-service RaftLeaderService {
-    rpc GetAllPendingLogs() return () {}
-}
+message AppendEntiresRequest {}
 
-service RaftFollowerService {
-    rpc StartElection() return () {}
-    rpc Vote() return () {}
-}
+message AppendEntiresResponse {}
 
-service RaftCandidateService {}
+message CommitEntriesRequest {}
+
+message CommitEntriesResponse {}
