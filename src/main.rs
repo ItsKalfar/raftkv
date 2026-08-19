@@ -4,9 +4,14 @@ mod raft;
 mod wal;
 
 fn main() -> std::io::Result<()> {
-    // Will start grpc server for this node
-    // get the address and initialize clients for remaining nodes
-    // Check for exisiting log file
-    // Start a node
+    // Start grpc server for this node
+    // Create channel and client for rest of the nodes -> Get node address from config file or something like that
+
+    // If this node is leader -> Receive queries from client
+    // Then complete a data lifecyle here -> append -> commit -> on each request
+
+    // If this node is follower -> recive data from leader
+    // perform operation of follower on each request
+
     Ok(())
 }

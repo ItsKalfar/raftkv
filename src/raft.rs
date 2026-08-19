@@ -17,9 +17,15 @@ enum NodeType {
     Follower,
 }
 
+enum NodeStatus {
+    Open,
+    Closed,
+}
+
 struct LogEntry {
     index: u64,
     message: String,
+    term: u64,
 }
 
 pub struct Node {
@@ -30,7 +36,7 @@ pub struct Node {
     current_term: u64,
     timeout: u64, // random milliseconds
     node_type: NodeType,
-    other_nodes: Vec<Node>,
+    peers: Vec<String>, // Address of peers
 }
 
 impl Node {
@@ -39,11 +45,24 @@ impl Node {
     // WAL
     pub fn append_entires() {
         // If leader -> Append to the log and send single to followers
+        // Sudo code for leader
+        // Get the query from client -> fsync the log file -> Append it to log -> send the query + commit_index + prev_index + current_term to follower
+        // If enough nodes returns ack - call commit_entries()
+        // If Error ->
+        // If Consistency error -> consistency_check()
+        // Any other error -> retry few times or for some time -> Still nothing happen -> mark node as closed -> send an alert message
+
         // If follower -> Append to the log and return the ack to leader
+        // Sudo code for follower
+        // Get query from leader -> check the prev index and current term ->
+        // if correct -> fsync the log file -> Append it to log -> return the ack
+        // if not correct -> return consistency error
     }
     pub fn commit_entires() {
-        // If leader -> get ack from follower nodes and if the count is (n/2) + 1 -> commit it -> send back the single to followers to commit as well
-        // If follower -> get the single from leader for commit and commit in state machine as well
+        // If leader -> get ack from follower nodes and if the count is (n/2) + 1 -> commit it (update the commit_index) -> send back the single to followers to commit as well
+        // if not enough node ack back -> return the error to client
+
+        // If follower -> get the single from leader -> Uopdate the commit index -> if fails to do so, return an error to leader
     }
 
     // WAL Helpers
@@ -69,6 +88,7 @@ impl Node {
     }
 
     pub fn start_election() {
+        // Vote for self
         // Only for follower -> Leader can't start election
         // Update the Term Count -> Update the node type to Candidate -> Send vote request to other nodes
     }
